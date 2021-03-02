@@ -1,0 +1,33 @@
+----------Install postres---------
+sudo apt-get install postgresql postgresql-contrib
+service postgresql
+service postgresql status
+sudo su - postgres
+invoke-rc.d postgresql restart
+sudo service postgresql restart
+invoke-rc.d postgresql reload
+ufw status
+ufw allow 5432
+ufw status
+sudo service postgresql restart
+invoke-rc.d postgresql reload
+
+-----UTF8-----
+update pg_database set datistemplate=false where datname='template1';
+drop database Template1;
+create database template1 with owner=postgres encoding='UTF-8'
+
+  lc_collate='en_US.utf8' lc_ctype='en_US.utf8' template template0;
+
+update pg_database set datistemplate=true where datname='template1';
+
+-----Create db and user------
+sudo su - postgres //switch account
+psql
+\du //list of users
+\l //list of databases
+create database mydb;
+create user myuser with encrypted password 'mypass';
+grant all privileges on database mydb to myuser;
+REVOKE ALL PRIVILEGES ON DATABASE database_name FROM username;
+

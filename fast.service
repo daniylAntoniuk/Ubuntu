@@ -1,0 +1,10 @@
+[Unit]
+Description= FastDostavkaProject
+[Service]
+User=root
+Type=simple
+WorkingDirectory=/var/lib/jenkins/workspace/Fast/FastDostavka/bin/Release/netcoreapp3.1/publish/ 
+ExecStart=/usr/bin/dotnet FastDostavka.dll --urls=http://localhost:5050
+SuccessExitStatus=143
+[Install]
+WantedBy=multi-user.target

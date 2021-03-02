@@ -1,0 +1,824 @@
+Microsoft Windows [Version 10.0.18362.778]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+C:\Users\Dan\source\repos\EJournalHost>docker image
+
+Usage:  docker image COMMAND
+
+Manage images
+
+Commands:
+  build       Build an image from a Dockerfile
+  history     Show the history of an image
+  import      Import the contents from a tarball to create a filesystem image
+  inspect     Display detailed information on one or more images
+  load        Load an image from a tar archive or STDIN
+  ls          List images
+  prune       Remove unused images
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rm          Remove one or more images
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+
+Run 'docker image COMMAND --help' for more information on a command.
+
+C:\Users\Dan\source\repos\EJournalHost>docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+
+C:\Users\Dan\source\repos\EJournalHost>docker build -t daniyl/ejournal
+"docker build" requires exactly 1 argument.
+See 'docker build --help'.
+
+Usage:  docker build [OPTIONS] PATH | URL | -
+
+Build an image from a Dockerfile
+
+C:\Users\Dan\source\repos\EJournalHost>docker build -t daniyl/ejournal .
+Sending build context to Docker daemon  224.9MB
+Step 1/32 : FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+3.1-buster-slim: Pulling from dotnet/core/aspnet
+54fec2fa59d0: Pull complete                                                                                             573788d8ba26: Pull complete                                                                                             d8e35c95ac02: Pull complete                                                                                             e158ea73cf60: Pull complete                                                                                             5c38381dab2d: Pull complete                                                                                             Digest: sha256:21d9448c98bf4968b72f64c484117f6bf04e27ff3ebc6af6ff7ba3ed1e894f82
+Status: Downloaded newer image for mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim
+ ---> 79e79777c3bf
+Step 2/32 : RUN apt-get update
+ ---> Running in cad385f195b0
+Get:1 http://security.debian.org/debian-security buster/updates InRelease [65.4 kB]
+Get:2 http://deb.debian.org/debian buster InRelease [122 kB]
+Get:3 http://deb.debian.org/debian buster-updates InRelease [49.3 kB]
+Get:4 http://security.debian.org/debian-security buster/updates/main amd64 Packages [197 kB]
+Get:5 http://deb.debian.org/debian buster/main amd64 Packages [7907 kB]
+Get:6 http://deb.debian.org/debian buster-updates/main amd64 Packages [7380 B]
+Fetched 8347 kB in 4s (1973 kB/s)
+Reading package lists...
+Removing intermediate container cad385f195b0
+ ---> c748b2789f0b
+Step 3/32 : RUN apt-get install -y mc
+ ---> Running in d55cab53d504
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  bzip2 file libgdbm-compat4 libgdbm6 libglib2.0-0 libglib2.0-data libgpm2
+  libmagic-mgc libmagic1 libperl5.28 libslang2 libxml2 mc-data mime-support
+  netbase perl perl-modules-5.28 shared-mime-info unzip xdg-user-dirs xz-utils
+Suggested packages:
+  bzip2-doc gdbm-l10n gpm sensible-utils arj catdvi | texlive-binaries dbview
+  djvulibre-bin epub-utils genisoimage gv imagemagick libaspell-dev links
+  | w3m | lynx odt2txt poppler-utils python python-boto python-tz xpdf
+  | pdf-viewer zip perl-doc libterm-readline-gnu-perl
+  | libterm-readline-perl-perl make libb-debug-perl liblocale-codes-perl
+The following NEW packages will be installed:
+  bzip2 file libgdbm-compat4 libgdbm6 libglib2.0-0 libglib2.0-data libgpm2
+  libmagic-mgc libmagic1 libperl5.28 libslang2 libxml2 mc mc-data mime-support
+  netbase perl perl-modules-5.28 shared-mime-info unzip xdg-user-dirs xz-utils
+0 upgraded, 22 newly installed, 0 to remove and 2 not upgraded.
+Need to get 14.2 MB of archives.
+After this operation, 83.1 MB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian buster/main amd64 perl-modules-5.28 all 5.28.1-6 [2873 kB]
+Get:2 http://deb.debian.org/debian buster/main amd64 libgdbm6 amd64 1.18.1-4 [64.7 kB]
+Get:3 http://deb.debian.org/debian buster/main amd64 libgdbm-compat4 amd64 1.18.1-4 [44.1 kB]
+Get:4 http://deb.debian.org/debian buster/main amd64 libperl5.28 amd64 5.28.1-6 [3883 kB]
+Get:5 http://deb.debian.org/debian buster/main amd64 perl amd64 5.28.1-6 [204 kB]
+Get:6 http://deb.debian.org/debian buster/main amd64 netbase all 5.6 [19.4 kB]
+Get:7 http://deb.debian.org/debian buster/main amd64 bzip2 amd64 1.0.6-9.2~deb10u1 [48.4 kB]
+Get:8 http://deb.debian.org/debian buster/main amd64 libmagic-mgc amd64 1:5.35-4+deb10u1 [242 kB]
+Get:9 http://deb.debian.org/debian buster/main amd64 libmagic1 amd64 1:5.35-4+deb10u1 [117 kB]
+Get:10 http://deb.debian.org/debian buster/main amd64 file amd64 1:5.35-4+deb10u1 [66.4 kB]
+Get:11 http://deb.debian.org/debian buster/main amd64 mime-support all 3.62 [37.2 kB]
+Get:12 http://deb.debian.org/debian buster/main amd64 xz-utils amd64 5.2.4-1 [183 kB]
+Get:13 http://deb.debian.org/debian buster/main amd64 libglib2.0-0 amd64 2.58.3-2+deb10u2 [1258 kB]
+Get:14 http://deb.debian.org/debian buster/main amd64 libglib2.0-data all 2.58.3-2+deb10u2 [1110 kB]
+Get:15 http://deb.debian.org/debian buster/main amd64 libgpm2 amd64 1.20.7-5 [35.1 kB]
+Get:16 http://deb.debian.org/debian buster/main amd64 libslang2 amd64 2.3.2-2 [507 kB]
+Get:17 http://deb.debian.org/debian buster/main amd64 libxml2 amd64 2.9.4+dfsg1-7+b3 [687 kB]
+Get:18 http://deb.debian.org/debian buster/main amd64 mc-data all 3:4.8.22-1 [1292 kB]
+Get:19 http://deb.debian.org/debian buster/main amd64 mc amd64 3:4.8.22-1 [516 kB]
+Get:20 http://deb.debian.org/debian buster/main amd64 shared-mime-info amd64 1.10-1 [766 kB]
+Get:21 http://deb.debian.org/debian buster/main amd64 unzip amd64 6.0-23+deb10u1 [172 kB]
+Get:22 http://deb.debian.org/debian buster/main amd64 xdg-user-dirs amd64 0.17-2 [53.8 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 14.2 MB in 3s (4334 kB/s)
+Selecting previously unselected package perl-modules-5.28.
+(Reading database ... 6912 files and directories currently installed.)
+Preparing to unpack .../00-perl-modules-5.28_5.28.1-6_all.deb ...
+Unpacking perl-modules-5.28 (5.28.1-6) ...
+Selecting previously unselected package libgdbm6:amd64.
+Preparing to unpack .../01-libgdbm6_1.18.1-4_amd64.deb ...
+Unpacking libgdbm6:amd64 (1.18.1-4) ...
+Selecting previously unselected package libgdbm-compat4:amd64.
+Preparing to unpack .../02-libgdbm-compat4_1.18.1-4_amd64.deb ...
+Unpacking libgdbm-compat4:amd64 (1.18.1-4) ...
+Selecting previously unselected package libperl5.28:amd64.
+Preparing to unpack .../03-libperl5.28_5.28.1-6_amd64.deb ...
+Unpacking libperl5.28:amd64 (5.28.1-6) ...
+Selecting previously unselected package perl.
+Preparing to unpack .../04-perl_5.28.1-6_amd64.deb ...
+Unpacking perl (5.28.1-6) ...
+Selecting previously unselected package netbase.
+Preparing to unpack .../05-netbase_5.6_all.deb ...
+Unpacking netbase (5.6) ...
+Selecting previously unselected package bzip2.
+Preparing to unpack .../06-bzip2_1.0.6-9.2~deb10u1_amd64.deb ...
+Unpacking bzip2 (1.0.6-9.2~deb10u1) ...
+Selecting previously unselected package libmagic-mgc.
+Preparing to unpack .../07-libmagic-mgc_1%3a5.35-4+deb10u1_amd64.deb ...
+Unpacking libmagic-mgc (1:5.35-4+deb10u1) ...
+Selecting previously unselected package libmagic1:amd64.
+Preparing to unpack .../08-libmagic1_1%3a5.35-4+deb10u1_amd64.deb ...
+Unpacking libmagic1:amd64 (1:5.35-4+deb10u1) ...
+Selecting previously unselected package file.
+Preparing to unpack .../09-file_1%3a5.35-4+deb10u1_amd64.deb ...
+Unpacking file (1:5.35-4+deb10u1) ...
+Selecting previously unselected package mime-support.
+Preparing to unpack .../10-mime-support_3.62_all.deb ...
+Unpacking mime-support (3.62) ...
+Selecting previously unselected package xz-utils.
+Preparing to unpack .../11-xz-utils_5.2.4-1_amd64.deb ...
+Unpacking xz-utils (5.2.4-1) ...
+Selecting previously unselected package libglib2.0-0:amd64.
+Preparing to unpack .../12-libglib2.0-0_2.58.3-2+deb10u2_amd64.deb ...
+Unpacking libglib2.0-0:amd64 (2.58.3-2+deb10u2) ...
+Selecting previously unselected package libglib2.0-data.
+Preparing to unpack .../13-libglib2.0-data_2.58.3-2+deb10u2_all.deb ...
+Unpacking libglib2.0-data (2.58.3-2+deb10u2) ...
+Selecting previously unselected package libgpm2:amd64.
+Preparing to unpack .../14-libgpm2_1.20.7-5_amd64.deb ...
+Unpacking libgpm2:amd64 (1.20.7-5) ...
+Selecting previously unselected package libslang2:amd64.
+Preparing to unpack .../15-libslang2_2.3.2-2_amd64.deb ...
+Unpacking libslang2:amd64 (2.3.2-2) ...
+Selecting previously unselected package libxml2:amd64.
+Preparing to unpack .../16-libxml2_2.9.4+dfsg1-7+b3_amd64.deb ...
+Unpacking libxml2:amd64 (2.9.4+dfsg1-7+b3) ...
+Selecting previously unselected package mc-data.
+Preparing to unpack .../17-mc-data_3%3a4.8.22-1_all.deb ...
+Unpacking mc-data (3:4.8.22-1) ...
+Selecting previously unselected package mc.
+Preparing to unpack .../18-mc_3%3a4.8.22-1_amd64.deb ...
+Unpacking mc (3:4.8.22-1) ...
+Selecting previously unselected package shared-mime-info.
+Preparing to unpack .../19-shared-mime-info_1.10-1_amd64.deb ...
+Unpacking shared-mime-info (1.10-1) ...
+Selecting previously unselected package unzip.
+Preparing to unpack .../20-unzip_6.0-23+deb10u1_amd64.deb ...
+Unpacking unzip (6.0-23+deb10u1) ...
+Selecting previously unselected package xdg-user-dirs.
+Preparing to unpack .../21-xdg-user-dirs_0.17-2_amd64.deb ...
+Unpacking xdg-user-dirs (0.17-2) ...
+Setting up perl-modules-5.28 (5.28.1-6) ...
+Setting up libgpm2:amd64 (1.20.7-5) ...
+Setting up mime-support (3.62) ...
+Setting up xdg-user-dirs (0.17-2) ...
+Setting up libmagic-mgc (1:5.35-4+deb10u1) ...
+Setting up libglib2.0-0:amd64 (2.58.3-2+deb10u2) ...
+No schema files found: doing nothing.
+Setting up unzip (6.0-23+deb10u1) ...
+Setting up libmagic1:amd64 (1:5.35-4+deb10u1) ...
+Setting up file (1:5.35-4+deb10u1) ...
+Setting up bzip2 (1.0.6-9.2~deb10u1) ...
+Setting up libglib2.0-data (2.58.3-2+deb10u2) ...
+Setting up libslang2:amd64 (2.3.2-2) ...
+Setting up xz-utils (5.2.4-1) ...
+update-alternatives: using /usr/bin/xz to provide /usr/bin/lzma (lzma) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/lzma.1.gz because associated file /usr/share/man/man1/xz.1.gz (of link group lzma) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/unlzma.1.gz because associated file /usr/share/man/man1/unxz.1.gz (of link group lzma) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/lzcat.1.gz because associated file /usr/share/man/man1/xzcat.1.gz (of link group lzma) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/lzmore.1.gz because associated file /usr/share/man/man1/xzmore.1.gz (of link group lzma) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/lzless.1.gz because associated file /usr/share/man/man1/xzless.1.gz (of link group lzma) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/lzdiff.1.gz because associated file /usr/share/man/man1/xzdiff.1.gz (of link group lzma) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/lzcmp.1.gz because associated file /usr/share/man/man1/xzcmp.1.gz (of link group lzma) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/lzgrep.1.gz because associated file /usr/share/man/man1/xzgrep.1.gz (of link group lzma) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/lzegrep.1.gz because associated file /usr/share/man/man1/xzegrep.1.gz (of link group lzma) doesn't exist
+update-alternatives: warning: skip creation of /usr/share/man/man1/lzfgrep.1.gz because associated file /usr/share/man/man1/xzfgrep.1.gz (of link group lzma) doesn't exist
+Setting up mc-data (3:4.8.22-1) ...
+Setting up netbase (5.6) ...
+Setting up libxml2:amd64 (2.9.4+dfsg1-7+b3) ...
+Setting up libgdbm6:amd64 (1.18.1-4) ...
+Setting up mc (3:4.8.22-1) ...
+update-alternatives: using /usr/bin/mcview to provide /usr/bin/view (view) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/view.1.gz because associated file /usr/share/man/man1/mcview.1.gz (of link group view) doesn't exist
+update-alternatives: using /usr/bin/mcedit to provide /usr/bin/editor (editor) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/editor.1.gz because associated file /usr/share/man/man1/mcedit.1.gz (of link group editor) doesn't exist
+Setting up shared-mime-info (1.10-1) ...
+Setting up libgdbm-compat4:amd64 (1.18.1-4) ...
+Setting up libperl5.28:amd64 (5.28.1-6) ...
+Setting up perl (5.28.1-6) ...
+Processing triggers for libc-bin (2.28-10) ...
+Removing intermediate container d55cab53d504
+ ---> bdd5bf1d793f
+Step 4/32 : RUN apt-get install -y curl
+ ---> Running in 8d75cc703b02
+Reading package lists...
+Building dependency tree...
+Reading state information...
+curl is already the newest version (7.64.0-4+deb10u1).
+0 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+Removing intermediate container 8d75cc703b02
+ ---> bf744f425bbd
+Step 5/32 : RUN apt-get install -y hwinfo
+ ---> Running in b97b98728a10
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libhd21 libx86emu2
+The following NEW packages will be installed:
+  hwinfo libhd21 libx86emu2
+0 upgraded, 3 newly installed, 0 to remove and 2 not upgraded.
+Need to get 809 kB of archives.
+After this operation, 3436 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian buster/main amd64 libx86emu2 amd64 2.0-1 [45.8 kB]
+Get:2 http://deb.debian.org/debian buster/main amd64 libhd21 amd64 21.63-3 [730 kB]
+Get:3 http://deb.debian.org/debian buster/main amd64 hwinfo amd64 21.63-3 [33.3 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 809 kB in 0s (1641 kB/s)
+Selecting previously unselected package libx86emu2:amd64.
+(Reading database ... 9787 files and directories currently installed.)
+Preparing to unpack .../libx86emu2_2.0-1_amd64.deb ...
+Unpacking libx86emu2:amd64 (2.0-1) ...
+Selecting previously unselected package libhd21:amd64.
+Preparing to unpack .../libhd21_21.63-3_amd64.deb ...
+Unpacking libhd21:amd64 (21.63-3) ...
+Selecting previously unselected package hwinfo.
+Preparing to unpack .../hwinfo_21.63-3_amd64.deb ...
+Unpacking hwinfo (21.63-3) ...
+Setting up libx86emu2:amd64 (2.0-1) ...
+Setting up libhd21:amd64 (21.63-3) ...
+Setting up hwinfo (21.63-3) ...
+Processing triggers for libc-bin (2.28-10) ...
+Removing intermediate container b97b98728a10
+ ---> 10692f37eb96
+Step 6/32 : RUN apt-get install -y busybox
+ ---> Running in 0ed2ef2d9deb
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  busybox
+0 upgraded, 1 newly installed, 0 to remove and 2 not upgraded.
+Need to get 432 kB of archives.
+After this operation, 786 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian buster/main amd64 busybox amd64 1:1.30.1-4 [432 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 432 kB in 0s (1422 kB/s)
+Selecting previously unselected package busybox.
+(Reading database ... 9814 files and directories currently installed.)
+Preparing to unpack .../busybox_1%3a1.30.1-4_amd64.deb ...
+Unpacking busybox (1:1.30.1-4) ...
+Setting up busybox (1:1.30.1-4) ...
+Removing intermediate container 0ed2ef2d9deb
+ ---> c5a917fad117
+Step 7/32 : RUN apt-get install -y iputils-ping
+ ---> Running in cd3c8ab1747d
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libcap2 libcap2-bin libpam-cap
+The following NEW packages will be installed:
+  iputils-ping libcap2 libcap2-bin libpam-cap
+0 upgraded, 4 newly installed, 0 to remove and 2 not upgraded.
+Need to get 104 kB of archives.
+After this operation, 315 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian buster/main amd64 libcap2 amd64 1:2.25-2 [17.6 kB]
+Get:2 http://deb.debian.org/debian buster/main amd64 iputils-ping amd64 3:20180629-2 [43.0 kB]
+Get:3 http://deb.debian.org/debian buster/main amd64 libcap2-bin amd64 1:2.25-2 [28.8 kB]
+Get:4 http://deb.debian.org/debian buster/main amd64 libpam-cap amd64 1:2.25-2 [14.3 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 104 kB in 0s (441 kB/s)
+Selecting previously unselected package libcap2:amd64.
+(Reading database ... 9826 files and directories currently installed.)
+Preparing to unpack .../libcap2_1%3a2.25-2_amd64.deb ...
+Unpacking libcap2:amd64 (1:2.25-2) ...
+Selecting previously unselected package iputils-ping.
+Preparing to unpack .../iputils-ping_3%3a20180629-2_amd64.deb ...
+Unpacking iputils-ping (3:20180629-2) ...
+Selecting previously unselected package libcap2-bin.
+Preparing to unpack .../libcap2-bin_1%3a2.25-2_amd64.deb ...
+Unpacking libcap2-bin (1:2.25-2) ...
+Selecting previously unselected package libpam-cap:amd64.
+Preparing to unpack .../libpam-cap_1%3a2.25-2_amd64.deb ...
+Unpacking libpam-cap:amd64 (1:2.25-2) ...
+Setting up libcap2:amd64 (1:2.25-2) ...
+Setting up libcap2-bin (1:2.25-2) ...
+Setting up libpam-cap:amd64 (1:2.25-2) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+Setting up iputils-ping (3:20180629-2) ...
+Processing triggers for libc-bin (2.28-10) ...
+Removing intermediate container cd3c8ab1747d
+ ---> 84b6c08a9327
+Step 8/32 : RUN apt-get install -y nodejs
+ ---> Running in a4a562cb9059
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libatomic1 libbrotli1 libc-ares2 libnode64 libuv1 nodejs-doc
+Suggested packages:
+  npm
+The following NEW packages will be installed:
+  libatomic1 libbrotli1 libc-ares2 libnode64 libuv1 nodejs nodejs-doc
+0 upgraded, 7 newly installed, 0 to remove and 2 not upgraded.
+Need to get 7156 kB of archives.
+After this operation, 31.8 MB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian buster/main amd64 libatomic1 amd64 8.3.0-6 [9032 B]
+Get:2 http://deb.debian.org/debian buster/main amd64 libbrotli1 amd64 1.0.7-2 [270 kB]
+Get:3 http://security.debian.org/debian-security buster/updates/main amd64 libnode64 amd64 10.19.0~dfsg1-1 [5627 kB]
+Get:4 http://deb.debian.org/debian buster/main amd64 libc-ares2 amd64 1.14.0-1 [85.8 kB]
+Get:5 http://deb.debian.org/debian buster/main amd64 libuv1 amd64 1.24.1-1 [110 kB]
+Get:6 http://security.debian.org/debian-security buster/updates/main amd64 nodejs-doc all 10.19.0~dfsg1-1 [968 kB]
+Get:7 http://security.debian.org/debian-security buster/updates/main amd64 nodejs amd64 10.19.0~dfsg1-1 [86.8 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 7156 kB in 1s (7019 kB/s)
+Selecting previously unselected package libatomic1:amd64.
+(Reading database ... 9866 files and directories currently installed.)
+Preparing to unpack .../0-libatomic1_8.3.0-6_amd64.deb ...
+Unpacking libatomic1:amd64 (8.3.0-6) ...
+Selecting previously unselected package libbrotli1:amd64.
+Preparing to unpack .../1-libbrotli1_1.0.7-2_amd64.deb ...
+Unpacking libbrotli1:amd64 (1.0.7-2) ...
+Selecting previously unselected package libc-ares2:amd64.
+Preparing to unpack .../2-libc-ares2_1.14.0-1_amd64.deb ...
+Unpacking libc-ares2:amd64 (1.14.0-1) ...
+Selecting previously unselected package libuv1:amd64.
+Preparing to unpack .../3-libuv1_1.24.1-1_amd64.deb ...
+Unpacking libuv1:amd64 (1.24.1-1) ...
+Selecting previously unselected package libnode64:amd64.
+Preparing to unpack .../4-libnode64_10.19.0~dfsg1-1_amd64.deb ...
+Unpacking libnode64:amd64 (10.19.0~dfsg1-1) ...
+Selecting previously unselected package nodejs-doc.
+Preparing to unpack .../5-nodejs-doc_10.19.0~dfsg1-1_all.deb ...
+Unpacking nodejs-doc (10.19.0~dfsg1-1) ...
+Selecting previously unselected package nodejs.
+Preparing to unpack .../6-nodejs_10.19.0~dfsg1-1_amd64.deb ...
+Unpacking nodejs (10.19.0~dfsg1-1) ...
+Setting up libbrotli1:amd64 (1.0.7-2) ...
+Setting up libc-ares2:amd64 (1.14.0-1) ...
+Setting up libuv1:amd64 (1.24.1-1) ...
+Setting up libatomic1:amd64 (8.3.0-6) ...
+Setting up nodejs-doc (10.19.0~dfsg1-1) ...
+Setting up libnode64:amd64 (10.19.0~dfsg1-1) ...
+Setting up nodejs (10.19.0~dfsg1-1) ...
+update-alternatives: using /usr/bin/nodejs to provide /usr/bin/js (js) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/js.1.gz because associated file /usr/share/man/man1/nodejs.1.gz (of link group js) doesn't exist
+Processing triggers for libc-bin (2.28-10) ...
+Removing intermediate container a4a562cb9059
+ ---> dfb6879161c6
+Step 9/32 : ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT false
+ ---> Running in 566946bd8f53
+Removing intermediate container 566946bd8f53
+ ---> 6b0959fdf25e
+Step 10/32 : RUN apt-get install -y locales
+ ---> Running in 64441c9535eb
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libc-l10n
+The following NEW packages will be installed:
+  libc-l10n locales
+0 upgraded, 2 newly installed, 0 to remove and 2 not upgraded.
+Need to get 4907 kB of archives.
+After this operation, 20.8 MB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian buster/main amd64 libc-l10n all 2.28-10 [847 kB]
+Get:2 http://deb.debian.org/debian buster/main amd64 locales all 2.28-10 [4060 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 4907 kB in 1s (3596 kB/s)
+Selecting previously unselected package libc-l10n.
+(Reading database ... 10024 files and directories currently installed.)
+Preparing to unpack .../libc-l10n_2.28-10_all.deb ...
+Unpacking libc-l10n (2.28-10) ...
+Selecting previously unselected package locales.
+Preparing to unpack .../locales_2.28-10_all.deb ...
+Unpacking locales (2.28-10) ...
+Setting up libc-l10n (2.28-10) ...
+Setting up locales (2.28-10) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+Generating locales (this might take a while)...
+Generation complete.
+Removing intermediate container 64441c9535eb
+ ---> 0d0126c33536
+Step 11/32 : RUN locale-gen uk_UA.UTF-8
+ ---> Running in e5f80c47da24
+Generating locales (this might take a while)...
+Generation complete.
+Removing intermediate container e5f80c47da24
+ ---> 23f2ca9382a9
+Step 12/32 : ENV LC_ALL uk_UA.UTF-8
+ ---> Running in 2cb0ddeb0382
+Removing intermediate container 2cb0ddeb0382
+ ---> 1b2bcc58865b
+Step 13/32 : ENV LANG uk_UA.UTF-8
+ ---> Running in 9a1988db45da
+Removing intermediate container 9a1988db45da
+ ---> be9f5d143b44
+Step 14/32 : WORKDIR /app
+ ---> Running in 9a95b13f716d
+Removing intermediate container 9a95b13f716d
+ ---> 96db973a9d7d
+Step 15/32 : EXPOSE 80
+ ---> Running in 6dc5310908e2
+Removing intermediate container 6dc5310908e2
+ ---> 078634827fec
+Step 16/32 : RUN curl -sL https://deb.nodesource.com/setup_12.x |  bash -
+ ---> Running in b87a05189c33
+bash: warning: setlocale: LC_ALL: cannot change locale (uk_UA.UTF-8)
+
+## Installing the NodeSource Node.js 12.x repo...
+
+
+## Populating apt-get cache...
+
++ apt-get update
+bash: warning: setlocale: LC_ALL: cannot change locale (uk_UA.UTF-8)
+Hit:1 http://deb.debian.org/debian buster InRelease
+Hit:2 http://security.debian.org/debian-security buster/updates InRelease
+Hit:3 http://deb.debian.org/debian buster-updates InRelease
+Reading package lists...
+
+## Installing packages required for setup: lsb-release gnupg...
+
++ apt-get install -y lsb-release gnupg > /dev/null 2>&1
+bash: warning: setlocale: LC_ALL: cannot change locale (uk_UA.UTF-8)
+
+## Confirming "buster" is supported...
+
++ curl -sLf -o /dev/null 'https://deb.nodesource.com/node_12.x/dists/buster/Release'
+bash: warning: setlocale: LC_ALL: cannot change locale (uk_UA.UTF-8)
+
+## Adding the NodeSource signing key to your keyring...
+
++ curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
+bash: warning: setlocale: LC_ALL: cannot change locale (uk_UA.UTF-8)
+Warning: apt-key output should not be parsed (stdout is not a terminal)
+OK
+
+## Creating apt sources list file for the NodeSource Node.js 12.x repo...
+
++ echo 'deb https://deb.nodesource.com/node_12.x buster main' > /etc/apt/sources.list.d/nodesource.list
+bash: warning: setlocale: LC_ALL: cannot change locale (uk_UA.UTF-8)
++ echo 'deb-src https://deb.nodesource.com/node_12.x buster main' >> /etc/apt/sources.list.d/nodesource.list
+bash: warning: setlocale: LC_ALL: cannot change locale (uk_UA.UTF-8)
+
+## Running `apt-get update` for you...
+
++ apt-get update
+bash: warning: setlocale: LC_ALL: cannot change locale (uk_UA.UTF-8)
+Hit:1 http://deb.debian.org/debian buster InRelease
+Hit:2 http://deb.debian.org/debian buster-updates InRelease
+Get:3 https://deb.nodesource.com/node_12.x buster InRelease [4584 B]
+Hit:4 http://security.debian.org/debian-security buster/updates InRelease
+Get:5 https://deb.nodesource.com/node_12.x buster/main amd64 Packages [765 B]
+Fetched 5349 B in 1s (5536 B/s)
+Reading package lists...
+
+## Run `sudo apt-get install -y nodejs` to install Node.js 12.x and npm
+## You may also need development tools to build native addons:
+     sudo apt-get install gcc g++ make
+## To install the Yarn package manager, run:
+     curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+     sudo apt-get update && sudo apt-get install yarn
+
+
+Removing intermediate container b87a05189c33
+ ---> 7b4ba8e39970
+Step 17/32 : RUN apt-get install -y nodejs
+ ---> Running in 1a2815f528db
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following packages were automatically installed and are no longer required:
+  libatomic1 libbrotli1 libc-ares2 libuv1 nodejs-doc
+Use 'apt autoremove' to remove them.
+The following additional packages will be installed:
+  libpython-stdlib libpython2-stdlib libpython2.7-minimal libpython2.7-stdlib
+  python python-minimal python2 python2-minimal python2.7 python2.7-minimal
+Suggested packages:
+  python-doc python-tk python2-doc python2.7-doc binutils binfmt-support
+The following packages will be REMOVED:
+  libnode64
+The following NEW packages will be installed:
+  libpython-stdlib libpython2-stdlib libpython2.7-minimal libpython2.7-stdlib
+  python python-minimal python2 python2-minimal python2.7 python2.7-minimal
+The following packages will be upgraded:
+  nodejs
+1 upgraded, 10 newly installed, 1 to remove and 2 not upgraded.
+Need to get 22.1 MB of archives.
+After this operation, 83.7 MB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian buster/main amd64 libpython2.7-minimal amd64 2.7.16-2+deb10u1 [395 kB]
+Get:2 http://deb.debian.org/debian buster/main amd64 python2.7-minimal amd64 2.7.16-2+deb10u1 [1369 kB]
+Get:3 https://deb.nodesource.com/node_12.x buster/main amd64 nodejs amd64 12.16.3-1nodesource1 [18.0 MB]
+Get:4 http://deb.debian.org/debian buster/main amd64 python2-minimal amd64 2.7.16-1 [41.4 kB]
+Get:5 http://deb.debian.org/debian buster/main amd64 python-minimal amd64 2.7.16-1 [21.0 kB]
+Get:6 http://deb.debian.org/debian buster/main amd64 libpython2.7-stdlib amd64 2.7.16-2+deb10u1 [1912 kB]
+Get:7 http://deb.debian.org/debian buster/main amd64 python2.7 amd64 2.7.16-2+deb10u1 [305 kB]
+Get:8 http://deb.debian.org/debian buster/main amd64 libpython2-stdlib amd64 2.7.16-1 [20.8 kB]
+Get:9 http://deb.debian.org/debian buster/main amd64 libpython-stdlib amd64 2.7.16-1 [20.8 kB]
+Get:10 http://deb.debian.org/debian buster/main amd64 python2 amd64 2.7.16-1 [41.6 kB]
+Get:11 http://deb.debian.org/debian buster/main amd64 python amd64 2.7.16-1 [22.8 kB]
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+        LANGUAGE = (unset),
+        LC_ALL = "uk_UA.UTF-8",
+        LANG = "uk_UA.UTF-8"
+    are supported and installed on your system.
+perl: warning: Falling back to the standard locale ("C").
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 22.1 MB in 2s (9621 kB/s)
+Selecting previously unselected package libpython2.7-minimal:amd64.
+(Reading database ... 11671 files and directories currently installed.)
+Preparing to unpack .../libpython2.7-minimal_2.7.16-2+deb10u1_amd64.deb ...
+Unpacking libpython2.7-minimal:amd64 (2.7.16-2+deb10u1) ...
+Selecting previously unselected package python2.7-minimal.
+Preparing to unpack .../python2.7-minimal_2.7.16-2+deb10u1_amd64.deb ...
+Unpacking python2.7-minimal (2.7.16-2+deb10u1) ...
+Selecting previously unselected package python2-minimal.
+Preparing to unpack .../python2-minimal_2.7.16-1_amd64.deb ...
+Unpacking python2-minimal (2.7.16-1) ...
+Selecting previously unselected package python-minimal.
+Preparing to unpack .../python-minimal_2.7.16-1_amd64.deb ...
+Unpacking python-minimal (2.7.16-1) ...
+dpkg: libnode64:amd64: dependency problems, but removing anyway as you requested:
+ nodejs depends on libnode64 (= 10.19.0~dfsg1-1).
+
+(Reading database ... 11914 files and directories currently installed.)
+Removing libnode64:amd64 (10.19.0~dfsg1-1) ...
+(Reading database ... 11907 files and directories currently installed.)
+Preparing to unpack .../nodejs_12.16.3-1nodesource1_amd64.deb ...
+Unpacking nodejs (12.16.3-1nodesource1) over (10.19.0~dfsg1-1) ...
+Selecting previously unselected package libpython2.7-stdlib:amd64.
+Preparing to unpack .../libpython2.7-stdlib_2.7.16-2+deb10u1_amd64.deb ...
+Unpacking libpython2.7-stdlib:amd64 (2.7.16-2+deb10u1) ...
+Selecting previously unselected package python2.7.
+Preparing to unpack .../python2.7_2.7.16-2+deb10u1_amd64.deb ...
+Unpacking python2.7 (2.7.16-2+deb10u1) ...
+Selecting previously unselected package libpython2-stdlib:amd64.
+Preparing to unpack .../libpython2-stdlib_2.7.16-1_amd64.deb ...
+Unpacking libpython2-stdlib:amd64 (2.7.16-1) ...
+Selecting previously unselected package libpython-stdlib:amd64.
+Preparing to unpack .../libpython-stdlib_2.7.16-1_amd64.deb ...
+Unpacking libpython-stdlib:amd64 (2.7.16-1) ...
+Setting up libpython2.7-minimal:amd64 (2.7.16-2+deb10u1) ...
+Setting up python2.7-minimal (2.7.16-2+deb10u1) ...
+Linking and byte-compiling packages for runtime python2.7...
+Setting up python2-minimal (2.7.16-1) ...
+Selecting previously unselected package python2.
+(Reading database ... 17217 files and directories currently installed.)
+Preparing to unpack .../python2_2.7.16-1_amd64.deb ...
+Unpacking python2 (2.7.16-1) ...
+Setting up python-minimal (2.7.16-1) ...
+Selecting previously unselected package python.
+(Reading database ... 17249 files and directories currently installed.)
+Preparing to unpack .../python_2.7.16-1_amd64.deb ...
+Unpacking python (2.7.16-1) ...
+Setting up nodejs (12.16.3-1nodesource1) ...
+Setting up libpython2.7-stdlib:amd64 (2.7.16-2+deb10u1) ...
+Setting up python2.7 (2.7.16-2+deb10u1) ...
+Setting up libpython2-stdlib:amd64 (2.7.16-1) ...
+Setting up python2 (2.7.16-1) ...
+Setting up libpython-stdlib:amd64 (2.7.16-1) ...
+Setting up python (2.7.16-1) ...
+Processing triggers for libc-bin (2.28-10) ...
+Processing triggers for mime-support (3.62) ...
+Removing intermediate container 1a2815f528db
+ ---> 09021d7c0643
+Step 18/32 : FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+3.1-buster: Pulling from dotnet/core/sdk
+90fe46dd8199: Pull complete                                                                                             35a4f1977689: Pull complete                                                                                             bbc37f14aded: Pull complete                                                                                             74e27dc593d4: Pull complete                                                                                             caa6ad693f93: Pull complete                                                                                             aae86a99db0a: Pull complete                                                                                             95f813d5736b: Pull complete                                                                                             Digest: sha256:d706e0545b75615ecd864c6af237cc1fc2ca9001ed25cdd84b83fdb3923e9e54
+Status: Downloaded newer image for mcr.microsoft.com/dotnet/core/sdk:3.1-buster
+ ---> 4aa6a74611ff
+Step 19/32 : RUN curl -sL https://deb.nodesource.com/setup_12.x |  bash -
+ ---> Running in e64bab5d4bf4
+
+## Installing the NodeSource Node.js 12.x repo...
+
+
+## Populating apt-get cache...
+
++ apt-get update
+Get:1 http://deb.debian.org/debian buster InRelease [122 kB]
+Get:2 http://security.debian.org/debian-security buster/updates InRelease [65.4 kB]
+Get:3 http://deb.debian.org/debian buster-updates InRelease [49.3 kB]
+Get:4 http://security.debian.org/debian-security buster/updates/main amd64 Packages [197 kB]
+Get:5 http://deb.debian.org/debian buster/main amd64 Packages [7907 kB]
+Get:6 http://deb.debian.org/debian buster-updates/main amd64 Packages [7380 B]
+Fetched 8347 kB in 4s (2144 kB/s)
+Reading package lists...
+
+## Installing packages required for setup: lsb-release...
+
++ apt-get install -y lsb-release > /dev/null 2>&1
+
+## Confirming "buster" is supported...
+
++ curl -sLf -o /dev/null 'https://deb.nodesource.com/node_12.x/dists/buster/Release'
+
+## Adding the NodeSource signing key to your keyring...
+
++ curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
+Warning: apt-key output should not be parsed (stdout is not a terminal)
+OK
+
+## Creating apt sources list file for the NodeSource Node.js 12.x repo...
+
++ echo 'deb https://deb.nodesource.com/node_12.x buster main' > /etc/apt/sources.list.d/nodesource.list
++ echo 'deb-src https://deb.nodesource.com/node_12.x buster main' >> /etc/apt/sources.list.d/nodesource.list
+
+## Running `apt-get update` for you...
+
++ apt-get update
+Hit:1 http://deb.debian.org/debian buster InRelease
+Hit:2 http://deb.debian.org/debian buster-updates InRelease
+Get:3 https://deb.nodesource.com/node_12.x buster InRelease [4584 B]
+Hit:4 http://security.debian.org/debian-security buster/updates InRelease
+Get:5 https://deb.nodesource.com/node_12.x buster/main amd64 Packages [765 B]
+Fetched 5349 B in 1s (5133 B/s)
+Reading package lists...
+
+## Run `sudo apt-get install -y nodejs` to install Node.js 12.x and npm
+## You may also need development tools to build native addons:
+     sudo apt-get install gcc g++ make
+## To install the Yarn package manager, run:
+     curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+     sudo apt-get update && sudo apt-get install yarn
+
+
+Removing intermediate container e64bab5d4bf4
+ ---> 4b6668e3743b
+Step 20/32 : RUN apt-get install -y nodejs
+ ---> Running in c6d374b5c958
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  nodejs
+0 upgraded, 1 newly installed, 0 to remove and 2 not upgraded.
+Need to get 18.0 MB of archives.
+After this operation, 90.0 MB of additional disk space will be used.
+Get:1 https://deb.nodesource.com/node_12.x buster/main amd64 nodejs amd64 12.16.3-1nodesource1 [18.0 MB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 18.0 MB in 2s (10.3 MB/s)
+Selecting previously unselected package nodejs.
+(Reading database ... 12920 files and directories currently installed.)
+Preparing to unpack .../nodejs_12.16.3-1nodesource1_amd64.deb ...
+Unpacking nodejs (12.16.3-1nodesource1) ...
+Setting up nodejs (12.16.3-1nodesource1) ...
+Removing intermediate container c6d374b5c958
+ ---> 44e4a732c984
+Step 21/32 : WORKDIR /src
+ ---> Running in 3927efacc7c5
+Removing intermediate container 3927efacc7c5
+ ---> 1a4dfba52989
+Step 22/32 : COPY ["EJournalHost/EJournalHost.csproj", "EJournalHost/"]
+ ---> f8671d8202b8
+Step 23/32 : RUN dotnet restore "EJournalHost/EJournalHost.csproj"
+ ---> Running in 4c7eb0215dcd
+  Restore completed in 8.23 sec for /src/EJournalHost/EJournalHost.csproj.
+Removing intermediate container 4c7eb0215dcd
+ ---> 385e65f8024f
+Step 24/32 : COPY . .
+ ---> 226a945005a3
+Step 25/32 : WORKDIR "/src/EJournalHost"
+ ---> Running in 8a3b067caf81
+Removing intermediate container 8a3b067caf81
+ ---> f531ef24fe3d
+Step 26/32 : RUN dotnet build "EJournalHost.csproj" -c Release -o /app/build
+ ---> Running in dc6bd0c2843d
+Microsoft (R) Build Engine version 16.5.0+d4cbfca49 for .NET Core
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Restore completed in 716.11 ms for /src/EJournalHost/EJournalHost.csproj.
+  EJournalHost -> /app/build/EJournalHost.dll
+  EJournalHost -> /app/build/EJournalHost.Views.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:15.23
+Removing intermediate container dc6bd0c2843d
+ ---> 24c1286febc7
+Step 27/32 : FROM build AS publish
+ ---> 24c1286febc7
+Step 28/32 : RUN dotnet publish "EJournalHost.csproj" -c Release -o /app/publish
+ ---> Running in ec073200dd1e
+Microsoft (R) Build Engine version 16.5.0+d4cbfca49 for .NET Core
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Restore completed in 96.44 ms for /src/EJournalHost/EJournalHost.csproj.
+  EJournalHost -> /src/EJournalHost/bin/Release/netcoreapp3.1/EJournalHost.dll
+  EJournalHost -> /src/EJournalHost/bin/Release/netcoreapp3.1/EJournalHost.Views.dll
+  npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.2 (node_modules/fsevents):
+  npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.2: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+  npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules/jest-haste-map/node_modules/fsevents):
+  npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+  npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules/watchpack/node_modules/fsevents):
+  npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+  npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.13 (node_modules/webpack-dev-server/node_modules/fsevents):
+  npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.13: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+
+  audited 909480 packages in 24.105s
+
+  49 packages are looking for funding
+    run `npm fund` for details
+
+  found 610 vulnerabilities (591 low, 19 moderate)
+    run `npm audit fix` to fix them, or `npm audit` for details
+
+  > ejournalhost@0.1.0 build /src/EJournalHost/ClientApp
+  > react-scripts build
+
+  Creating an optimized production build...
+  Compiled successfully.
+
+  File sizes after gzip:
+
+    61.09 KB  build/static/js/2.625b6872.chunk.js
+    22.45 KB  build/static/css/2.c6250e3a.chunk.css
+    3.18 KB   build/static/js/main.a87b159c.chunk.js
+    775 B     build/static/js/runtime-main.28cd3b73.js
+    271 B     build/static/css/main.6636e503.chunk.css
+
+  The project was built assuming it is hosted at /.
+  You can control this with the homepage field in your package.json.
+
+  The build folder is ready to be deployed.
+  You may serve it with a static server:
+
+    npm install -g serve
+    serve -s build
+
+  Find out more about deployment here:
+
+    bit.ly/CRA-deploy
+
+  EJournalHost -> /app/publish/
+Removing intermediate container ec073200dd1e
+ ---> f4ede2621745
+Step 29/32 : FROM base AS final
+ ---> 09021d7c0643
+Step 30/32 : WORKDIR /app
+ ---> Running in ff576df190bf
+Removing intermediate container ff576df190bf
+ ---> dc9aa3b33610
+Step 31/32 : COPY --from=publish /app/publish .
+ ---> bf28385fdc18
+Step 32/32 : ENTRYPOINT ["dotnet", "EJournalHost.dll"]
+ ---> Running in 625121a96a3c
+Removing intermediate container 625121a96a3c
+ ---> f248ed167699
+Successfully built f248ed167699
+Successfully tagged daniyl/ejournal:latest
+SECURITY WARNING: You are building a Docker image from Windows against a non-Windows Docker host. All files and directories added to build context will have '-rwxr-xr-x' permissions. It is recommended to double check and reset permissions for sensitive files and directories.
+
+C:\Users\Dan\source\repos\EJournalHost>docker images
+REPOSITORY                             TAG                 IMAGE ID            CREATED             SIZE
+daniyl/ejournal                        latest              f248ed167699        3 minutes ago       475MB
+<none>                                 <none>              f4ede2621745        3 minutes ago       1.05GB
+mcr.microsoft.com/dotnet/core/sdk      3.1-buster          4aa6a74611ff        2 weeks ago         691MB
+mcr.microsoft.com/dotnet/core/aspnet   3.1-buster-slim     79e79777c3bf        2 weeks ago         207MB
+
+C:\Users\Dan\source\repos\EJournalHost>docker tag f248 daniyl/ejournal:ejournal
+
+C:\Users\Dan\source\repos\EJournalHost>docker images
+REPOSITORY                             TAG                 IMAGE ID            CREATED             SIZE
+daniyl/ejournal                        ejournal            f248ed167699        42 hours ago        475MB
+daniyl/ejournal                        latest              f248ed167699        42 hours ago        475MB
+<none>                                 <none>              f4ede2621745        42 hours ago        1.05GB
+mcr.microsoft.com/dotnet/core/sdk      3.1-buster          4aa6a74611ff        2 weeks ago         691MB
+mcr.microsoft.com/dotnet/core/aspnet   3.1-buster-slim     79e79777c3bf        2 weeks ago         207MB
+
+C:\Users\Dan\source\repos\EJournalHost>docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: daniyl
+Password:
+Error response from daemon: Get https://registry-1.docker.io/v2/: unauthorized: incorrect username or password
+
+C:\Users\Dan\source\repos\EJournalHost>docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: daniyl
+Password:
+WARNING! Your password will be stored unencrypted in C:\Users\Dan\.docker\config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+
+C:\Users\Dan\source\repos\EJournalHost>docker push daniyl/ejournal:ejournal
+The push refers to repository [docker.io/daniyl/ejournal]
+75428329a672: Pushed                                                                                                    3dc6ee74c42a: Pushed                                                                                                    bd9fbee57947: Pushed                                                                                                    277cb7e4cfab: Pushed                                                                                                    e1166b3b09d6: Pushed                                                                                                    7fd4e28ebc5d: Pushed                                                                                                    d687f3e376dd: Pushed                                                                                                    8329c4937894: Pushed                                                                                                    cffbc00a43c7: Pushed                                                                                                    f32822cad1e0: Pushed                                                                                                    095798f6977d: Pushed                                                                                                    fc512ca4361b: Pushed                                                                                                    98b87267e8cd: Pushed                                                                                                    731d9ef100ab: Pushed                                                                                                    097cf5cb984a: Pushed                                                                                                    4c1434a6c15b: Pushed                                                                                                    c2adabaecedb: Pushed                                                                                                    ejournal: digest: sha256:d3409cae78b5d13a3d93a04d5cf1373befc027d87d6b92e995fc7741cc4608f2 size: 3901
+
+C:\Users\Dan\source\repos\EJournalHost>color a
+
+C:\Users\Dan\source\repos\EJournalHost>color ad
+
+C:\Users\Dan\source\repos\EJournalHost>color a
+
+C:\Users\Dan\source\repos\EJournalHost>

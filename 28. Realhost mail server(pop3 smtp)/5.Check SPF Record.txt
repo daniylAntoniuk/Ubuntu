@@ -1,0 +1,16 @@
+sudo apt install postfix-policyd-spf-python
+--------/etc/postfix/master.cf-------------
+policyd-spf  unix  -       n       n       -       0       spawn
+    user=policyd-spf argv=/usr/bin/policyd-spf
+
+----------/etc/postfix/main.cf-----------------
+
+policyd-spf_time_limit = 3600
+smtpd_recipient_restrictions =
+   permit_mynetworks,
+   permit_sasl_authenticated,
+   reject_unauth_destination,
+   check_policy_service unix:private/policyd-spf
+sudo systemctl restart postfix
+
+https://wiki2.dovecot.org/HowTo/DovecotPostgresql

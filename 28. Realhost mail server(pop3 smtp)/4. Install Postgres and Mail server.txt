@@ -1,0 +1,182 @@
+------DNS Cheker---------
+https://dnschecker.org/#A/karpaty.tk
+-------------------Install postgres--------------------------
+sudo apt-get install postgresql postgresql-contrib
+service postgresql
+service postgresql status
+------------Restart postgres-------------
+invoke-rc.d postgresql restart
+sudo service postgresql restart
+invoke-rc.d postgresql reload
+------------Allow UFW-----------
+ufw status
+ufw allow 5432
+ufw status
+
+--Configure UTF8---
+sudo su - postgres
+psql
+postgres-# \conninfo
+
+\l
+\du
+update pg_database set datistemplate=false where datname='template1';
+drop database Template1;
+create database template1 with owner=postgres encoding='UTF-8' lc_collate='en_US.utf8' lc_ctype='en_US.utf8' template template0;
+
+update pg_database set datistemplate=true where datname='template1';
+
+---Configure /etc/postgresql/10/main/pg_hba.conf file -----
+Change to:
+
+# Put your actual configuration here
+host    all         all         127.0.0.1         255.255.255.255   password
+
+# IPv4 local connections:
+host    all             all             all            md5
+
+------------Configure /etc/postgresql/10/main/postgresql.conf----------------
+listen_addresses='localhost'
+to
+
+listen_addresses='*'
+
+sudo service postgresql restart
+
+-----Create db and user------
+sudo su - postgres //switch account
+createdb mails
+psql mails
+
+CREATE TABLE transport (
+  domain VARCHAR(128) NOT NULL,
+  transport VARCHAR(128) NOT NULL,
+  PRIMARY KEY (domain)
+);
+CREATE TABLE users (
+  userid VARCHAR(128) NOT NULL,
+  password VARCHAR(128),
+  realname VARCHAR(128),
+  uid INTEGER NOT NULL,
+  gid INTEGER NOT NULL,
+  home VARCHAR(128),
+  mail VARCHAR(255),
+  PRIMARY KEY (userid)
+);
+CREATE TABLE virtual (
+  address VARCHAR(255) NOT NULL,
+  userid VARCHAR(255) NOT NULL,
+  PRIMARY KEY (address)
+);
+create view postfix_mailboxes as
+  select userid, home||'/' as mailbox from users
+  union all
+  select domain as userid, 'dummy' as mailbox from transport;
+create view postfix_virtual as
+  select userid, userid as address from users
+  union all
+  select userid, address from virtual;
+
+CREATE USER mailreader PASSWORD '%0Ub0Gh*}?KiFHQ';
+grant select on transport, users, virtual, postfix_mailboxes, postfix_virtual to mailreader;
+create user mailwriter password 'VEceCS8c07)~YejQ';
+grant select, insert, update, delete on transport, users, virtual, postfix_mailboxes, postfix_virtual to mailwriter;
+
+
+#Examples
+
+insert into transport (domain, transport) values ('domain.org', 'virtual:');
+insert into transport (domain, transport) values ('foo.org', 'virtual:');
+insert into users (userid, uid, gid, home) values ('user@domain.org', 1001, 1001, 'domain.org/mails/user');
+insert into users (userid, uid, gid, home) values ('user2@domain.org', 1001, 1001, 'domain.org/mails/user2');
+insert into users (userid, uid, gid, home) values ('user@foo.org', 1002, 1002, 'foo.org/mails/user');
+insert into virtual (address, userid) values ('foo@foo.org', 'user@foo.org');
+
+
+--------------Install Postfix---------------
+sudo apt-get update
+sudo apt-get install postfix postfix-pgsql -y
+
+--For realhost--
+
+-----Change to /etc/postfix/main.cf--------
+
+relayhost = relay.realhost.pro:25
+
+sudo service postfix restart
+---Install mailutils-----
+sudo apt install mailutils
+echo "" | mail -a "Content-type: text/html;" -s "Cаша" novakvova@gmail.com
+
+------------Option freenom---Щоб не ішло в спам для txt запис dns--------------
+------якщо не realhost--------
+v=spf1 a mx ip4:91.238.103.51 include:_spf.google.com ~all
+------для realhost---https://realhost.pro/kb/vps/why-disabled-mailing-----
+v=spf1 a mx a:relay.realhost.pro ip4:91.238.103.51 include:_spf.google.com ~all 
+
+-----Тепер можне тестити чи листи не попадають в спам. Далі додаємо в /etc/postfix/main.cf настройки для багатьох доменів----
+mydomain = karpaty.tk
+virtual_alias_domains = karpaty.tk ...other hosted domains..
+sudo service postfix restart
+
+----не збуть відключит ngix------Ставимо сертифікат certbot для smtp and pop3 imap, ...--------------
+sudo apt install certbot
+ufw allow 443
+ufw allow 80
+sudo certbot certonly --standalone -d karpaty.tk
+
+-------Change to /etc/postfix/main.cf--replace 23 24 line default-------
+smtpd_tls_cert_file = /etc/letsencrypt/live/karpaty.tk/fullchain.pem
+smtpd_tls_key_file = /etc/letsencrypt/live/karpaty.tk/privkey.pem
+sudo service postfix restart
+
+----------Install Dovecot------------
+sudo apt-get install dovecot-pgsql dovecot-imapd dovecot-pop3d
+apt-get install dovecot-lmtpd
+----------Configure Devecot with postfix-------/etc/postfix/main.cf----------
+smtpd_sasl_type = dovecot
+smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination, check_policy_service unix:private/policyd-spf
+
+transport_maps = pgsql:/etc/postfix/transport.cf
+virtual_uid_maps = pgsql:/etc/postfix/uids.cf
+virtual_gid_maps = pgsql:/etc/postfix/gids.cf
+virtual_mailbox_base = /home
+virtual_mailbox_maps = pgsql:/etc/postfix/mailboxes.cf
+#smtpd_sender_login_maps = pgsql:/etc/postfix/virtual.cf
+virtual_maps = pgsql:/etc/postfix/virtual.cf
+
+-----------configure and copy five files to /etc/postfix/-------------
+
+-----config /etc/dovecot/dovecot.conf-------
+mail_location = maildir:/home/postfix/%u/mails/
+
+auth default {
+    passdb sql {
+        args = /etc/dovecot/dovecot-sql.conf
+    }
+    userdb sql {
+        args = /etc/dovecot/dovecot-sql.conf
+    }
+}
+protocols = imap lmtp pop3 pop3s
+
+-------create folder /home/postfix-------
+
+-------copy file /etc/dovecot/dovecot-sql.conf to server----------------
+
+sudo service postfix restart
+sudo service dovecot restart
+
+--------------
+insert into transport (domain, transport) values ('karpaty.tk', 'virtual:');
+insert into users (userid, password, uid, gid, home) values ('user@karpaty.tk', '{PLAIN}Qwerty-1', 1001, 1001, 'postfix/user@karpaty.tk/mails');
+
+ufw allow 25
+ufw allow 993
+ufw allow 995
+
+-----ALLOW folder acces POSTFIX folder /home/postfix---------
+
+------net stat info-------
+apt-get install net-tools
+sudo netstat -tupn

@@ -1,0 +1,22 @@
+------ Install ------
+sudo apt-get install openjdk-8-jdk
+ 
+sudo apt-get install nginx  (якщо не має)
+
+wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
+
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+
+sudo apt-get update
+
+sudo apt-get install jenkins
+
+за портом 8080 дженкінс (http://{ip}:8080)
+ ----- Corfigure -----
+за портом 8080 просить пароль, получити його можна тут:
+cat /var/lib/jenkins/secrets/initialAdminPassword
+вводимо цей пароль на сайті
+
+далі вибираємо suggested plugins
+
+реєструемось і все готово, офіціант встановлений

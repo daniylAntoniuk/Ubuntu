@@ -1,0 +1,6 @@
+docker build -t {dockerId}/{name}
+docker images
+docker tag {imgId} {dockerId}/{name}:{newTag}
+docker image rm {imgId} -f
+docker login
+docker push daniyl/ejournal:ejournal

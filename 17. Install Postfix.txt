@@ -1,0 +1,38 @@
+1. Add domain karpaty.tk
+add nds txt запис
+v=spf1 a mx ip4:95.214.10.36  include:_spf.google.com ~all
+RealHOST (v=spf1 a mx a:relay.realhost.pro ip4:95.214.10.36  include:_spf.google.com ~all) https://realhost.pro/kb/vps/why-disabled-mailing
+
+2. Install Postfix ubuntu
+https://www.linuxbabe.com/mail-server/setup-basic-postfix-mail-sever-ubuntu-14-04
+https://www.youtube.com/watch?v=5aWGNhimaTg
+
+hostname -f
+-----Install Postfix-----
+sudo apt-get update
+sudo apt-get install postfix -y
+
+--/etc/postfix/main.cf--
+user@mail:~$ sudo postconf mail_version
+mail_version = 2.11.0
+
+---netstat---
+sudo netstat -lnpt
+--not found netstat--
+apt-get install net-tools
+sudo nmap 95.214.10.36
+sudo apt-get install nmap
+
+----test 25 port to gmail------
+telnet gmail-smtp-in.l.google.com. 25
+
+----Open 25 port ----
+iptables -I INPUT -p tcp -m tcp --dport 25 -j ACCEPT
+sudo ufw allow 25/tcp
+sudo ufw status numbers
+sudo ufw delete 5
+
+-------Install mailutils-------------
+sudo apt install mailutils
+echo "" | mail -a "Content-type: text/html;" -s "Cаша" novakvova@gmail.com
+echo "" | mail -a "Content-type: text/html;" -s "Cаша" novakvova@gmail.com -aFrom:noreply@karpaty.tk

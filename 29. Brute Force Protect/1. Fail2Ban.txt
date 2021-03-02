@@ -1,0 +1,73 @@
+----------Install----------
+sudo apt update
+sudo apt install fail2ban
+
+sudo systemctl status fail2ban
+
+-------------Configure-----------------
+sudo cp /etc/fail2ban/jail.{conf,local}
+
+sudo nano /etc/fail2ban/jail.local
+
+Uncomment ignoreip and add your ip
+Example:
+ignoreip = 127.0.0.1/8 ::1 123.123.123.123 192.168.1.0/24
+
+
+------Ban Settings------
+The values of bantime, findtime, and maxretry options define the ban time and ban conditions.
+bantime is the duration for which the IP is banned. When no suffix is specified, it defaults to seconds. By default, the bantime value is set to 10 minutes. Generally, most users will want to set a longer ban time. Change the value to your liking:
+
+----------/etc/fail2ban/jail.local-----------
+bantime  = 1d
+To permanently ban the IP use a negative number.
+
+findtime is the duration between the number of failures before a ban is set. For example, if Fail2ban is set to ban an IP after five failures (maxretry, see below), those failures must occur within the findtime duration.
+
+----------/etc/fail2ban/jail.local-----------
+findtime  = 10m
+
+maxretry is the number of failures before an IP is banned. The default value is set to five, which should be fine for most users.
+
+-----------etc/fail2ban/jail.local--------
+maxretry = 5
+
+
+
+
+
+------Email Notifications------
+Fail2ban can send email alerts when an IP has been banned. To receive emails, you need to have an SMTP installed on your server and change the default action, which only bans the IP to %(action_mw)s, as shown below:
+----/etc/fail2ban/jail.local---------
+action = %(action_mw)s
+
+%(action_mw)s bans the offending IP and sends an email with a whois report. If you want to include the relevant logs in the email, set the action to %(action_mwl)s.
+You can also adjust the sending and receiving email addresses:
+
+-------/etc/fail2ban/jail.local--------
+destemail = admin@karpaty.tk
+
+sender = root@karpaty.tk
+
+-------Fail2ban Jails-------
+By default, only the ssh jail is enabled. To enable a jail, 
+you need to add enabled = true after the jail title. 
+The following example shows how to enable the proftpd jail:
+
+[sshd]
+enabled   = true
+
+
+----------Commands--------------
+Check the jail status:
+sudo fail2ban-client status sshd
+
+Unban an IP:
+sudo fail2ban-client set sshd unbanip 23.34.45.56
+
+Ban an IP:
+sudo fail2ban-client set sshd banip 23.34.45.56
+
+
+-------Source---------
+https://linuxize.com/post/install-configure-fail2ban-on-ubuntu-20-04/

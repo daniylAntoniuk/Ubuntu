@@ -1,0 +1,12 @@
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-postfix-as-a-send-only-smtp-server-on-ubuntu-18-04-ru
+---Begin step 4-----
+sudo dpkg-reconfigure postfix
+
+sudo add-apt-repository ppa:certbot/certbot
+
+sudo systemctl stop nginx
+
+sudo certbot certonly --standalone --rsa-key-size 4096 --agree-tos --preferred-challenges http -d karpaty.tk
+
+sudo systemctl start nginx
+

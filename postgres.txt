@@ -1,0 +1,13 @@
+----------Install postres---------
+sudo apt-get install postgresql postgresql-contrib
+service postgresql
+service postgresql status
+sudo su - postgres
+invoke-rc.d postgresql restart
+sudo service postgresql restart
+invoke-rc.d postgresql reload
+ufw status
+ufw allow 5432
+ufw status
+sudo service postgresql restart
+invoke-rc.d postgresql reload

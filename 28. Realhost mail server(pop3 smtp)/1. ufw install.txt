@@ -1,0 +1,5 @@
+sudo apt-get install ufw
+ufw app list
+sudo ufw allow ssh
+ufw enable
+ufw status

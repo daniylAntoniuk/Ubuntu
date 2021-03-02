@@ -1,0 +1,8 @@
+щоб юзер міг слати повідомлення тільки з адресу з якого він зайшов в файлі main.cf додати :
+
+smtpd_sender_login_maps = pgsql:/etc/postfix/virtual.cf
+smtpd_sender_restrictions =
+	reject_authenticated_sender_login_mismatch
+
+
+http://www.postfix.org/postconf.5.html#smtpd_sender_login_maps

@@ -1,0 +1,66 @@
+----install git-----
+
+sudo apt update
+sudo apt install git
+git --version
+
+git config --global user.name "novakvova"
+git config --global user.email "novakvova@gmail.com"
+
+
+docker rm $(docker ps -a -q)
+-----create image------------
+-----Переходимо в папку куда треба----------
+git clone https://github.com/novakvova/max31
+
+cd max31
+
+docker build -t laptopshop .
+
+docker images
+
+docker container ls
+
+docker run --publish 0.0.0.0:120:80 --detach --name laptopshop.in.ua laptopshop
+docker run --publish 0.0.0.0:120:80 --detach --name laptopshop.in.ua --restart always laptopshop
+
+docker container ls -a
+
+docker container stop baraholka.com.ua
+
+docker container ls -a
+
+docker container start baraholka.com.ua
+
+------------------push docker hub--------------------------
+docker images
+
+docker tag 1ff3 novakvova/laptopshop:v0.1
+
+docker images
+
+docker login
+
+docker push novakvova/max31:hubhub
+
+docker container rm baraholka.com.ua
+
+docker container ls -a
+
+docker image rm novakvova/max31:hubhub
+
+docker image rm image_semen:latest
+
+docker images
+
+docker pull novakvova/max31:hubhub
+
+docker images
+
+docker run --publish 0.0.0.0:100:80 --detach --name baraholka.com.ua novakvova/max31:hubhub
+docker run -p 1803:80 --name mykola ann1h1lation/eshop:1.0
+
+
+docker exec -t -i baraholka.com.ua /bin/bash 
+
+

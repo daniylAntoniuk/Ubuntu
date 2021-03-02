@@ -1,0 +1,10 @@
+ufw allow 28707
+Open the /etc/ssh/sshd_config file and locate the line:
+#Port 22
+Then, uncomment (Remove the leading # character) it and change the value with an appropriate port number (for example, 22000):
+Port 28707
+Restart the SSH server:
+systemctl restart sshd
+ufw deny 22
+ufw status
+

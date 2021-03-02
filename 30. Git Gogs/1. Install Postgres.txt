@@ -1,0 +1,49 @@
+-------------------Install postgres--------------------------
+sudo apt-get install postgresql postgresql-contrib
+service postgresql
+service postgresql status
+
+------------Restart postgres-------------
+invoke-rc.d postgresql restart
+sudo service postgresql restart
+invoke-rc.d postgresql reload
+
+------------Allow UFW-----------
+ufw status
+ufw allow 5432
+ufw status
+
+--Configure UTF8---
+sudo su - postgres
+psql
+postgres-# \conninfo
+
+\l
+\du
+update pg_database set datistemplate=false where datname='template1';
+drop database Template1;
+create database template1 with owner=postgres encoding='UTF-8' lc_collate='en_US.utf8' lc_ctype='en_US.utf8' template template0;
+
+update pg_database set datistemplate=true where datname='template1';
+
+---Configure /etc/postgresql/10/main/pg_hba.conf file -----
+Change to:
+
+# Put your actual configuration here
+host    all         all         127.0.0.1         255.255.255.255   password
+
+# IPv4 local connections:
+host    all             all             all            md5
+
+------------Configure /etc/postgresql/10/main/postgresql.conf----------------
+listen_addresses='localhost'
+to
+
+listen_addresses='*'
+
+sudo service postgresql restart
+
+-----Create db and user------
+create database gogs;
+create user gogs with encrypted password 'mypass';
+grant all privileges on database gogs to gogs;

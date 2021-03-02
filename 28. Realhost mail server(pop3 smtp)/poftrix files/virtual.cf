@@ -1,0 +1,7 @@
+user=mailreader
+password=%0Ub0Gh*}?KiFHQ
+dbname=mails
+table=postfix_virtual
+select_field=userid
+where_field=address
+hosts=localhost
